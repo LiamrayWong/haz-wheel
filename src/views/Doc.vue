@@ -2,7 +2,7 @@
   <div>
     <Topnav />
     <div class="content">
-      <aside>
+      <aside v-if="asideVisible">
         <h2>组件列表</h2>
         <ol>
           <li>
@@ -26,9 +26,15 @@
 
 <script lang="ts">
 import Topnav from "../components/Topnav.vue";
+import { inject, Ref } from "vue";
 export default {
   components: {
     Topnav,
+  },
+  setup() {
+    const asideVisible = inject<Ref<boolean>>("xxx"); //get
+    console.log("Doc 获取的为：" + asideVisible.value);
+    return { asideVisible };
   },
 };
 </script>
@@ -41,7 +47,7 @@ aside {
   position: fixed;
   top: 0;
   left: 0;
-  padding-top: 8 0px;
+  padding-top: 80px;
   > h2 {
     margin-bottom: 4px;
   }
