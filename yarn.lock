@@ -2015,6 +2015,11 @@ vite@^1.0.0-rc.1:
     vue "^3.0.0-rc.5"
     ws "^7.2.3"
 
+vue-router@4.0.0-beta.11:
+  version "4.0.0-beta.11"
+  resolved "https://registry.npm.taobao.org/vue-router/download/vue-router-4.0.0-beta.11.tgz?cache=0&sync_timestamp=1600589412110&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvue-router%2Fdownload%2Fvue-router-4.0.0-beta.11.tgz#a236e2c4ab65cfba6c37c9e2c9d8653dc9e7c46c"
+  integrity sha1-ojbixKtlz7psN8niydhlPcnnxGw=
+
 vue@^3.0.0-rc.1, vue@^3.0.0-rc.5:
   version "3.0.0"
   resolved "https://registry.npm.taobao.org/vue/download/vue-3.0.0.tgz?cache=0&sync_timestamp=1600441287086&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvue%2Fdownload%2Fvue-3.0.0.tgz#cfb5df5c34efce319b113a1667d12b74dcfd9c90"
