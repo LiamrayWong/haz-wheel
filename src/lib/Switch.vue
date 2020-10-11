@@ -1,12 +1,11 @@
 <template>
-  <button @click="toggle" :class="{ checked: value }">
+  <button class="haz-switch" @click="toggle" :class="{ 'haz-checked': value }">
     <span></span>
   </button>
   <div>{{ value }}</div>
 </template>
 
 <script lang="ts">
-import { ref } from "vue";
 export default {
   props: {
     value: Boolean,
@@ -20,10 +19,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 $h: 22px;
 $h2: $h - 4px;
-button {
+.haz-switch {
   height: $h;
   width: $h * 2;
   border: none;
@@ -40,7 +39,7 @@ button {
     border-radius: $h2/2;
     transition: left 250ms;
   }
-  &.checked {
+  &.haz-checked {
     background: #10a0ff;
     > span {
       left: calc(100% - #{$h2} - 2px);
@@ -54,7 +53,7 @@ button {
       width: $h2 + 2px;
     }
   }
-  &.checked:active {
+  &.haz-checked:active {
     > span {
       width: $h2 + 2px;
       margin-left: -2px;
