@@ -9,7 +9,7 @@ export default {
   name: "App",
   setup() {
     const screenWidth = document.documentElement.clientWidth;
-    const asideVisible = ref(screenWidth <= 500 ? false : true);
+    const asideVisible = ref(screenWidth > 500);
     provide("asideVisible", asideVisible); //set
     router.afterEach(() => {
       if (screenWidth <= 500) {
