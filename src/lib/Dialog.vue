@@ -1,19 +1,23 @@
 <template>
   <template v-if="visible">
+    <Teleport to="body">
     <div class="haz-dialog-overlay" @click="closeOnClickOverlay"></div>
-    <div class="haz-dialog-wrapper">
-      <div class="haz-dialog">
-        <header>标题<span class="haz-dialog-close" @click="close"></span></header>
-        <main>
-          <p>第一行字</p>
-          <p>第二行字</p>
-        </main>
-        <footer>
-          <Button level="main" @click="ok">Ok</Button>
-          <Button @click="cancel">Cancel</Button>
-        </footer>
+      <div class="haz-dialog-wrapper">
+        <div class="haz-dialog">
+          <header>
+            <slot name="title"/>
+            <span class="haz-dialog-close" @click="close"></span>
+          </header>
+          <main>
+            <slot name="content"/>
+          </main>
+          <footer>
+            <Button level="main" @click="ok">Ok</Button>
+            <Button @click="cancel">Cancel</Button>
+          </footer>
+        </div>
       </div>
-    </div>
+    </Teleport>
   </template>
 
 </template>
@@ -23,6 +27,10 @@ import Button from './Button.vue';
 
 export default {
   props: {
+    title:{
+      type:String,
+      default:"提示"
+    },
     visible: {
       type: Boolean,
       default: false
