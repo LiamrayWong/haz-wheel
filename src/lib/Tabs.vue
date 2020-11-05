@@ -1,11 +1,11 @@
 <template>
   <div class="haz-tabs">
-    <div class="haz-tabs-nav">
-      <div v-for="(t,index) in titles"
-           :key="index" :class="{selected:t === selected}"
+    <div ref="container" class="haz-tabs-nav">
+      <div v-for="(t,index) in titles" :key="index"
+           :ref="el => {if(el) navItems[index] = el}" :class="{selected:t === selected}"
            class="haz-tabs-nav-item" @click="select(t)">{{ t }}
       </div>
-      <div class="haz-tabs-nav-indicator"></div>
+      <div ref="indicator" class="haz-tabs-nav-indicator"></div>
     </div>
     <div class="haz-tabs-content">
       <component :is="c" v-for="(c,index) in defaults"
@@ -16,6 +16,7 @@
 
 <script lang="ts">
 import Tab from '../lib/Tab.vue';
+import {onMounted,onUpdated, ref} from 'vue';
 
 export default {
   props: {
@@ -27,6 +28,21 @@ export default {
     }
   },
   setup(props, context) {
+    const navItems = ref<HTMLDivElement[]>([]);
+    const indicator = ref<HTMLDivElement>(null);
+    const container = ref<HTMLDivElement>(null);
+    const x = ()=>{
+      const divs = navItems.value;
+      const result = divs.filter((div) => div.classList.contains('selected'))[0];
+      const {width} = result.getBoundingClientRect();
+      indicator.value.style.width = width + 'px';
+      const {left:left1} = container.value.getBoundingClientRect()
+      const {left:left2} = result.getBoundingClientRect()
+      const left = left2 - left1
+      indicator.value.style.left = left + 'px'
+    }
+    onMounted(x);
+    onUpdated(x)
     const defaults = context.slots.default();
     const select = (title: String) => {
       context.emit('update:selected', title);
@@ -39,7 +55,7 @@ export default {
     const titles = defaults.map((tag) => {
       return tag.props.title;
     });
-    return {defaults, titles, select};
+    return {defaults, titles, select, navItems, indicator, container};
   }
 };
 </script>
@@ -76,6 +92,7 @@ $border-color: #d9d9d9;
       left: 0;
       bottom: -1px;
       width: 100px;
+      transition: all 250ms;
     }
   }
 
